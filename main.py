@@ -71,28 +71,47 @@ class Aurauth:
 
         for name, data in self.accounts.items():
             # The "Bubble" Container
-            bubble = tk.Frame(self.scrollable_frame, bg="#1e1e1e", padx=15, pady=15, 
+            bubble = tk.Frame(self.scrollable_frame, bg="#1e1e1e", padx=10, pady=10, 
                               highlightbackground="#333333", highlightthickness=1)
-            bubble.pack(fill="x", pady=8, padx=5)
+            bubble.pack(fill="x", pady=5, padx=5)
 
-            # Site and Username labels
+            # Left side: Site and Username
             info_frame = tk.Frame(bubble, bg="#1e1e1e")
-            info_frame.pack(side="left", fill="y")
+            info_frame.pack(side="left", fill="y", padx=5)
             
-            tk.Label(info_frame, text=name.upper(), font=("Segoe UI", 12, "bold"), 
+            tk.Label(info_frame, text=name.upper(), font=("Segoe UI", 11, "bold"), 
                      fg="#00adb5", bg="#1e1e1e").pack(anchor="w")
             
             user_text = data.get('user', 'Account')
-            tk.Label(info_frame, text=user_text, font=("Segoe UI", 9), 
+            tk.Label(info_frame, text=user_text, font=("Segoe UI", 8), 
                      fg="#aaaaaa", bg="#1e1e1e").pack(anchor="w")
 
-            # The Live Code
+            # Right side: Delete Button
+            # Using a simple "X" or "Delete" button
+            delete_btn = tk.Button(bubble, text="✕", command=lambda n=name: self.delete_account(n),
+                                  bg="#1e1e1e", fg="#ff5555", relief="flat", 
+                                  activebackground="#ff5555", activeforeground="white",
+                                  font=("Arial", 12, "bold"), cursor="hand2")
+            delete_btn.pack(side="right", padx=5)
+
+            # The Live Code (Placed next to delete button)
             code_label = tk.Label(bubble, text="000 000", font=("Consolas", 18, "bold"), 
                                  fg="white", bg="#1e1e1e")
-            code_label.pack(side="right")
+            code_label.pack(side="right", padx=10)
             
             self.bubbles[name] = code_label
 
+    def delete_account(self, name):
+        # Ask for confirmation so you don't lose your 2FA access by mistake!
+        answer = messagebox.askyesno("Confirm Delete", f"Are you sure you want to remove {name}?\n\nMake sure you have a backup or 2FA is disabled on the site first!")
+        
+        if answer:
+            # Remove from dictionary
+            del self.accounts[name]
+            # Save the updated JSON
+            self.save_vault()
+            # Re-draw the bubbles
+            self.render_bubbles()
     def import_qr(self):
         file_path = filedialog.askopenfilename(filetypes=[("Image files", "*.png *.jpg *.jpeg")])
         if not file_path: return
