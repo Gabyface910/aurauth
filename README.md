@@ -1,3 +1,12 @@
+<div align="center">
+
+  ![icon](https://github.com/Gabyface910/aurauth/blob/main/icon.png?raw=true)
+
+  # Aurauth - the portable 2FA client
+  Easily take your 2FA anywhere and log in lickety-split.
+</div>
+
+
 ## How to use Aurauth
 Aurauth is cross-platform and entirely Python!
 Just run `python3 aurauth/main.py` and you'll be ready to go!
