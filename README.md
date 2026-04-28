@@ -1,6 +1,6 @@
 <div align="center">
 
-  ![icon](https://github.com/Gabyface910/aurauth/blob/main/icon.png?raw=true)
+  [![icon](https://github.com/Gabyface910/aurauth/blob/main/icon.png?raw=true)](https://github.com/Gabyface910/aurauth)
 
   # Aurauth - the portable 2FA client
   Easily take your 2FA anywhere and log in lickety-split.
