@@ -1,6 +1,3 @@
-# aurauth
-Easy python 2FA client
-
 ## How to use Aurauth
 Aurauth is cross-platform and entirely Python!
 Just run `python3 aurauth/main.py` and you'll be ready to go!
